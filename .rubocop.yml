@@ -1,0 +1,8 @@
+Style/AsciiComments:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
