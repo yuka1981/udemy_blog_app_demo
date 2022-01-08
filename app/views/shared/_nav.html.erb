@@ -11,9 +11,15 @@
       </div>
       <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><%= link_to "Authors", "#" %></li>
-          <li><%= link_to 'Sign up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+          <li class="active"><%= link_to 'Articles', "#" %></li>
+          <% if user_signed_in? %>
+            <li class="navbar-text">Signed in as <%= current_user.email %></li>
+            <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+          <% end %>
+          <% unless user_signed_in? %>
+            <li><%= link_to 'Sign in', new_user_session_path %></li>
+            <li><%= link_to 'Sign up', new_user_registration_path %></li>
+          <% end %>
         </ul>
       </div>
     </div>
