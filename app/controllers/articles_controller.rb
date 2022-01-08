@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  before_action :find_article, only: %i[show edit update]
+  before_action :find_article, only: %i[show edit update destroy]
 
   def index
     @articles = Article.all
@@ -34,6 +34,13 @@ class ArticlesController < ApplicationController
       flash.now[:danger] = 'Article has not been updated.'
       render :edit
     end
+  end
+
+  def destroy
+    return unless @article.destroy
+
+    flash[:notice] = 'Article has been deleted.'
+    redirect_to articles_path
   end
 
   private
