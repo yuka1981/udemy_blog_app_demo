@@ -1,1 +1,21 @@
-<%= link_to 'New Article', new_article_path %>
+<div class="mb-3">
+  <%= link_to 'New Article', new_article_path, class: "btn btn-primary btn-sm" %>
+</div>
+<% if @articles.empty? %>
+  <h2 id="no-articles">
+    No Articles Created.
+  </h2>
+<% else %>
+  <% @articles.each do |article| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <%= link_to article.title, article_path(article) %>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <%= truncate(article.body, length: 200) %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
