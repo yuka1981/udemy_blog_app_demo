@@ -47,6 +47,7 @@ group :development, :test do
   gem 'guard', '2.18.0'
   gem 'guard-rspec', '4.7.3'
   gem 'guard-cucumber', '3.0.0'
+  gem 'htmlbeautifier'
 end
 
 group :test do
