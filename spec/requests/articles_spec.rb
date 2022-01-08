@@ -22,7 +22,7 @@ RSpec.describe "Articles", type: :request do
       it "handles non-existing article" do
         flash_message = 'The article you are looking for could not be found.'
 
-        expect(flash[:alert]).to eq(flash_message)
+        expect(flash[:danger]).to eq(flash_message)
         expect(response).to redirect_to(articles_path)
       end
     end
