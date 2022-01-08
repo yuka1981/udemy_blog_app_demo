@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          <%= @article.title %>
+        </h2>
+      </div>
+      <div class="panel-body">
+        <%= @article.body %>
+      </div>
+      <div class="panel-footer">
+        <div>
+          <small><%= time_ago_in_words(@article.created_at, include_seconds: true) %> ago created.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-1 col-md-1">
+    <%= link_to 'Back', articles_path, class: "btn btn-warning btn-sm" %>
+  </div>
+</div>

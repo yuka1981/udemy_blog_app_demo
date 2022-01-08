@@ -9,6 +9,10 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
+  def show
+    @article = Article.find(params[:id])
+  end
+
   def create
     @article = Article.new(article_params)
     if @article.save
@@ -24,5 +28,10 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :body)
+  end
+
+  def resource_not_found
+    flash[:danger] = 'The article you are looking for could not be found.'
+    redirect_to articles_path
   end
 end
