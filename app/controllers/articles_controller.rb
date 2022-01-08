@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
+  before_action :find_article, only: %i[show edit update]
+
   def index
     @articles = Article.all
   end
@@ -9,9 +11,7 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
-  def show
-    @article = Article.find(params[:id])
-  end
+  def show; end
 
   def create
     @article = Article.new(article_params)
@@ -24,7 +24,23 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    if @article.update(article_params)
+      flash[:notice] = 'Article has been updated.'
+      redirect_to @article
+    else
+      flash.now[:danger] = 'Article has not been updated.'
+      render :edit
+    end
+  end
+
   private
+
+  def find_article
+    @article = Article.find(params[:id])
+  end
 
   def article_params
     params.require(:article).permit(:title, :body)
