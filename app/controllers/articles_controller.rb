@@ -30,6 +30,7 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :body)
   end
 
+  # 覆寫 application 的 resource_not_found method
   def resource_not_found
     flash[:danger] = 'The article you are looking for could not be found.'
     redirect_to articles_path
