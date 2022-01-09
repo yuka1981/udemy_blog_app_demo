@@ -9,18 +9,23 @@ class CommentsController < ApplicationController
     # @comment.user = current_user
     # @comment.article_id = params[:article_id]
 
-    @comment = @article.comments.build(comment_params)
-    @comment.user = current_user
-
-    if @comment.save
-      flash[:notice] = 'A comment has been created.'
-      # redirect_to article_path(@comment.article_id)
+    unless current_user
+      flash[:alert] = 'Please sign in or sing up first'
+      redirect_to new_user_session_path
     else
-      flash[:danger] = 'A comment has not been created.'
-      # render
-    end
+      @comment = @article.comments.build(comment_params)
+      @comment.user = current_user
 
-    redirect_to article_path(@article)
+      if @comment.save
+        flash[:notice] = 'A comment has been created.'
+        # redirect_to article_path(@comment.article_id)
+      else
+        flash[:danger] = 'A comment has not been created.'
+        # render
+      end
+
+      redirect_to article_path(@article)
+    end
   end
 
   private
