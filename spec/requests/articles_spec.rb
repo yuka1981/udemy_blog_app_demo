@@ -12,7 +12,9 @@ RSpec.describe "Articles", type: :request do
       before { get "/articles/#{@article.id}" }
 
       it "handles existing article" do
-        expect(response.success?).to eq(true)
+        # deprecated in rails 6
+        # expect(response.success?).to eq(true) 
+        expect(response).to have_http_status(:ok)
       end
     end
 
