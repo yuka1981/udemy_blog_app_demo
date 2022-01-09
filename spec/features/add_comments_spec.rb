@@ -15,9 +15,9 @@ RSpec.feature 'Adding reviews to articles' do
     visit '/'
     click_link @article.title
     fill_in 'New Comment', with: 'An amazing article'
-    click_button 'New Comment'
+    click_button 'Add Comment'
 
-    expect(page).to have_content('A comment has been created.') 
+    expect(page).to have_content('A comment has been created.')
     expect(page).to have_content('An amazing article')
     expect(page.current_path).to eq(article_path(@article.id))
   end
