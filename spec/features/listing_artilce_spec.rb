@@ -4,12 +4,12 @@ require 'rails_helper'
 
 RSpec.feature 'List artiles' do
   before do
-    user = User.create!(email: 'user@example.com', password: 'password')
-    @article1 = Article.create(title: 'first article', body: 'Lorem, ipsum dolor sit amet...', user: user)
-    @article2 = Article.create(title: 'second article', body: 'Lorem, ipsum dolor sit amet consectetur...', user: user)
+    @user = User.create!(email: 'user@example.com', password: 'password')
+    @article1 = Article.create(title: 'first article', body: 'Lorem, ipsum dolor sit amet...', user: @user)
+    @article2 = Article.create(title: 'second article', body: 'Lorem, ipsum dolor sit amet consectetur...', user: @user)
   end
 
-  scenario 'a user lists all articles' do
+  scenario 'without sign-in user' do
     visit '/'
 
     expect(page).to have_content(@article1.title)
@@ -18,6 +18,20 @@ RSpec.feature 'List artiles' do
     expect(page).to have_content(@article2.body)
     expect(page).to have_link(@article1.title)
     expect(page).to have_link(@article2.title)
+    expect(page).not_to have_link('New Article')
+  end
+
+  scenario 'with sign-in user' do
+    login_as(@user)
+    visit '/'
+
+    expect(page).to have_content(@article1.title)
+    expect(page).to have_content(@article1.body)
+    expect(page).to have_content(@article2.title)
+    expect(page).to have_content(@article2.body)
+    expect(page).to have_link(@article1.title)
+    expect(page).to have_link(@article2.title)
+    expect(page).to have_link('New Article')
   end
 
   scenario 'a user has no article' do
