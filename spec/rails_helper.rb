@@ -69,6 +69,6 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
 
   config.color = true
-  config.formatter = :documentation
-  config.order = 'default'
+  # config.formatter = :documentation
+  # config.order = 'default'
 end
