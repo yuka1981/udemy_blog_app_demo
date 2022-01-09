@@ -35,13 +35,17 @@ RSpec.feature 'Showing an article' do
     expect(page).not_to have_link('Delete')
   end
 
-  # scenario 'show edit and delete button with article owner' do
-  #   visit '/'
-  #   click_link @article.title
-  
-  #   expect(page).to have_content(@article.title)
-  #   expect(page).to have_content(@article.body)
-  #   expect(page.current_path).to eq(article_path(@article))
-  #   expect(page).to have_link('Back')
-  # end
+  scenario 'show edit and delete button with article owner' do
+    login_as(@reid)
+
+    visit '/'
+    click_link @article.title
+
+    expect(page).to have_content(@article.title)
+    expect(page).to have_content(@article.body)
+    expect(page.current_path).to eq(article_path(@article))
+    expect(page).to have_link('Back')
+    expect(page).to have_link('Edit')
+    expect(page).to have_link('Delete')
+  end
 end
