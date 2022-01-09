@@ -15,7 +15,9 @@ RSpec.feature 'Creating article' do
     fill_in 'Body', with: 'Body content'
     click_button 'Create Article'
 
+    expect(Article.last.user).to eq(@user)
     expect(page).to have_content('Article has been created.')
+    expect(page).to have_content("Created by #{@user.email}")
     expect(page.current_path).to eq(articles_path)
   end
 
