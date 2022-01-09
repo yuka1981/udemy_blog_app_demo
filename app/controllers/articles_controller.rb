@@ -12,7 +12,10 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
-  def show; end
+  def show
+    @comment = @article.comments.build
+    @comments = @article.comments
+  end
 
   def create
     @article = Article.new(article_params)
